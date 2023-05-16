@@ -175,64 +175,43 @@ public void find_empty_cells(int j) {
     // Parcourt toutes les cellules adjacentes à la cellule donnée
     if (current_col > 0) { 
         cell = j - cols - 1;
-        if (cell >= 0 && field[cell] > MINE_CELL) {
-            uncover_cell(cell);
-            if (field[cell] == EMPTY_CELL) {
-                find_empty_cells(cell);
-            }
-        }
+            Parcourt_Cellule_empty(cell);
 
         cell = j - 1;
-        if (cell >= 0 && field[cell] > MINE_CELL) {
-            uncover_cell(cell);
-            if (field[cell] == EMPTY_CELL) {
-                find_empty_cells(cell);
-            }
-        }
+            Parcourt_Cellule_empty(cell);
 
         cell = j + cols - 1;
-        if (cell < all_cells && field[cell] > MINE_CELL) {
-            uncover_cell(cell);
-            if (field[cell] == EMPTY_CELL) {
-                find_empty_cells(cell);
-            }
-        }
+            Parcourt_Cellule(cell);
     }
 
     cell = j - cols;
-    if (cell >= 0 && field[cell] > MINE_CELL) {
-        uncover_cell(cell);
-        if (field[cell] == EMPTY_CELL) {
-            find_empty_cells(cell);
-        }
-    }
+        Parcourt_Cellule_empty(cell);
 
     cell = j + cols;
-    if (cell < all_cells && field[cell] > MINE_CELL) {
-        uncover_cell(cell);
-        if (field[cell] == EMPTY_CELL) {
-            find_empty_cells(cell);
-        }
-    }
+        Parcourt_Cellule(cell);
 
     if (current_col < (cols - 1)) {
         cell = j - cols + 1;
+            Parcourt_Cellule_empty(cell);
+
+        cell = j + cols + 1;
+            Parcourt_Cellule(cell);
+
+        cell = j + 1;
+            Parcourt_Cellule(cell);
+    }
+}
+
+    private void Parcourt_Cellule_empty(int cell) {
         if (cell >= 0 && field[cell] > MINE_CELL) {
             uncover_cell(cell);
             if (field[cell] == EMPTY_CELL) {
                 find_empty_cells(cell);
             }
         }
+    }
 
-        cell = j + cols + 1;
-        if (cell < all_cells && field[cell] > MINE_CELL) {
-            uncover_cell(cell);
-            if (field[cell] == EMPTY_CELL) {
-                find_empty_cells(cell);
-            }
-        }
-
-        cell = j + 1;
+    private void Parcourt_Cellule(int cell) {
         if (cell < all_cells && field[cell] > MINE_CELL) {
             uncover_cell(cell);
             if (field[cell] == EMPTY_CELL) {
@@ -240,7 +219,6 @@ public void find_empty_cells(int j) {
             }
         }
     }
-}
 
 private void uncover_cell(int cell) {
     field[cell] -= COVER_FOR_CELL;
