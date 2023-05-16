@@ -41,6 +41,7 @@ public class Board extends JPanel {
     private int cols = 16;
     private int all_cells;
     private JLabel statusbar;
+     SecureRandom random; 
 
 
     /**
@@ -50,6 +51,7 @@ public class Board extends JPanel {
  * @return none
  */
 public Board(JLabel statusbar) {
+    random = new SecureRandom();
 
     // Initialise l'étiquette de statut du jeu
     this.statusbar = statusbar;
@@ -81,12 +83,10 @@ public Board(JLabel statusbar) {
 public void newGame() {
 
     // Initialise les variables nécessaires pour la nouvelle partie
-     SecureRandom random; 
     int current_col;
     int i = 0;
     int position = 0;
     int cell = 0;
-    random = new SecureRandom();
     inGame = true;
     mines_left = mines;
     all_cells = rows * cols;
