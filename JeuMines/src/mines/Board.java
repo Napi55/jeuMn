@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -80,12 +81,12 @@ public Board(JLabel statusbar) {
 public void newGame() {
 
     // Initialise les variables nécessaires pour la nouvelle partie
-    Random random;
+     SecureRandom random; 
     int current_col;
     int i = 0;
     int position = 0;
     int cell = 0;
-    random = new Random();
+    random = new SecureRandom();
     inGame = true;
     mines_left = mines;
     all_cells = rows * cols;
