@@ -119,45 +119,47 @@ public void newGame() {
             // Incrémente le nombre de mines adjacentes pour chaque cellule voisine
             if (current_col > 0) { 
                 cell = position - 1 - cols;
-                if (cell >= 0)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                    COVERED_MINE_CELL(cell);
                 cell = position - 1;
                 if (cell >= 0)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                     COVERED_MINE_CELL(cell);
+
                 cell = position + cols - 1;
                 if (cell < all_cells)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                        COVERED_MINE_CELL(cell);
+
             }
 
             cell = position - cols;
-            if (cell >= 0)
-                if (field[cell] != COVERED_MINE_CELL)
-                    field[cell] += 1;
+                                COVERED_MINE_CELL(cell);
+
             cell = position + cols;
-            if (cell < all_cells)
-                if (field[cell] != COVERED_MINE_CELL)
-                    field[cell] += 1;
+                COVERED_MINE_CELL_allCells(cell);
 
             if (current_col < (cols - 1)) {
                 cell = position - cols + 1;
-                if (cell >= 0)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                                       COVERED_MINE_CELL(cell);
+
                 cell = position + cols + 1;
-                if (cell < all_cells)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                    COVERED_MINE_CELL_allCells(cell);
                 cell = position + 1;
-                if (cell < all_cells)
-                    if (field[cell] != COVERED_MINE_CELL)
-                        field[cell] += 1;
+                    COVERED_MINE_CELL_allCells(cell);
             }
         }
     }
 }
+
+    private void COVERED_MINE_CELL_allCells(int cell) {
+        if (cell < all_cells && field[cell] != COVERED_MINE_CELL)
+        
+                field[cell] += 1;
+    }
+
+    private void COVERED_MINE_CELL(int cell) {
+        if ((cell >= 0 && field[cell] != COVERED_MINE_CELL)  )
+            field[cell] += 1;
+        
+    }
 
 
 /**
@@ -293,13 +295,17 @@ public void paint(Graphics g) {
         }
     }
 
-    // Vérifie si le jeu est terminé et met à jour la barre de statut en conséquence
-    if (uncover == 0 && inGame) {
-        inGame = false;
-        statusbar.setText("Game won");
-    } else if (!inGame)
-        statusbar.setText("Game lost");
+        Mettreajour_barre_statut(uncover);
 }
+   // Vérifie si le jeu est terminé et met à jour la barre de statut en conséquence
+    private void Mettreajour_barre_statut(int uncover) {
+     
+        if (uncover == 0 && inGame) {
+            inGame = false;
+            statusbar.setText("Game won");
+        } else if (!inGame)
+            statusbar.setText("Game lost");
+    }
 
 
 
